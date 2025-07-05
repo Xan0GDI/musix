@@ -7,7 +7,6 @@ This is a beautiful, animated, single-page website to advertise your music. It's
 1.  **Add Your Assets:**
     *   Replace `logo.png` with your own logo (preferably square).
     *   Replace `background.png` with your desired background image.
-    *   Add your social/music platform icons to the `icons/` folder. They should be SVG or PNG files and named in lowercase without spaces (e.g., `spotify.svg`, `applemusic.svg`). If an icon is not found, it will be hidden gracefully.
 
 2.  **Customize Your Content:**
     *   Open the `script.js` file.
@@ -18,20 +17,3 @@ This is a beautiful, animated, single-page website to advertise your music. It's
 
 3.  **Open `index.html`:**
     *   That's it! Open the `index.html` file in your web browser to see your personalized site.
-
-## File Structure
-
-```
-.
-├── icons/
-│   ├── applemusic.svg  (example)
-│   ├── instagram.svg   (example)
-│   ├── soundcloud.svg  (example)
-│   ├── spotify.svg     (example)
-│   └── youtube.svg     (example)
-├── background.png      (Your background image)
-├── index.html          (The main page)
-├── logo.png            (Your logo)
-├── script.js           (Your configuration file)
-└── style.css           (Styling - no need to edit)
-```
