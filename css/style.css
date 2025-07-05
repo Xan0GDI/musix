@@ -1,0 +1,247 @@
+:root {
+    --card-background: rgba(255, 255, 255, 0.05); /* Made more transparent */
+    --border-color: rgba(255, 255, 255, 0.2);
+    --text-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --background-blur: 18px; /* Increased blur for a frostier look */
+}
+
+/* ✨ Redesigned Body and Background Animation ✨ */
+body {
+    margin: 0;
+    padding: 40px 20px;
+    background-color: #1a1a1a; /* Dark base color */
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+    position: relative; /* Needed for the ::before pseudo-element */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Brighter and slightly more saturated colors */
+    background: linear-gradient(125deg, rgba(120, 120, 255, 0.2), rgba(255, 120, 120, 0.2), rgba(120, 255, 120, 0.2));
+    background-size: 400% 400%;
+    animation: aurora-effect 30s ease infinite;
+    z-index: -1; /* Place it behind the content */
+}
+
+@keyframes aurora-effect {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    width: 100%;
+    max-width: 800px; /* Slightly narrower for a cleaner feel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    padding-bottom: 50px; /* Ensures space at the bottom */
+    /* Add these two lines to center the container itself */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    text-align: center;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 5px 25px var(--shadow-color);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+}
+
+.logo:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.artist-name {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-top: 15px;
+    text-shadow: 0 2px 15px var(--shadow-color);
+}
+
+/* Refined Glassmorphism Cards */
+.profile-links, .music-card {
+    background: var(--card-background);
+    backdrop-filter: blur(var(--background-blur));
+    -webkit-backdrop-filter: blur(var(--background-blur));
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    animation: fadeInUp 1s ease-out;
+    animation-fill-mode: backwards;
+}
+
+.profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.profile-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 400;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.profile-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--border-color);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+    width: 100%;
+    display: grid;
+    /* Responsive grid for song embeds */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.music-card {
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.music-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 40px var(--shadow-color);
+}
+
+.music-card iframe {
+    display: block;
+    border: none;
+    width: 100%;
+}
+/* Styling for the Audio Player Container */
+#background-audio {
+    position: fixed; /* Keep it in a fixed spot on the screen */
+    bottom: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    width: 280px; /* A fixed width, adjust based on preference */
+    max-width: 90%; /* Ensure responsiveness on small screens */
+    z-index: 1000; /* Make sure it's above other content */
+
+    /* Apply Glassmorphism styles */
+    background: var(--card-background);
+    backdrop-filter: blur(var(--background-blur));
+    -webkit-backdrop-filter: blur(var(--background-blur));
+    border: 1px solid var(--border-color);
+    border-radius: 15px; /* Slightly smaller radius than cards for distinction */
+    box-shadow: 0 5px 20px var(--shadow-color);
+    padding: 8px 12px; /* Some internal padding */
+
+    /* Make the whole thing subtly animated on load */
+    animation: fadeInRight 0.8s ease-out forwards; /* New animation */
+    opacity: 0; /* Start invisible for animation */
+}
+
+/* Keyframe for the audio player fade-in from right */
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Optionally, hide it on very small screens if it takes up too much space */
+@media (max-width: 600px) {
+    #background-audio {
+        width: calc(100% - 40px); /* Full width minus padding */
+        left: 20px; /* Center it */
+        right: 20px;
+        bottom: 10px; /* Move slightly up */
+        padding: 6px 10px;
+    }
+}
+
+
+/* Styling for the Custom Music Toggle Button (if you used Option B) */
+#toggle-music-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001; /* Above the audio player if both are visible */
+
+    /* Glassmorphism Button Style */
+    background: rgba(255, 255, 255, 0.15); /* Slightly less transparent for button */
+    backdrop-filter: blur(var(--background-blur));
+    -webkit-backdrop-filter: blur(var(--background-blur));
+    border: 1px solid var(--border-color);
+    border-radius: 50px; /* Pill shape */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none; /* Remove default focus outline */
+    transition: all 0.3s ease; /* Smooth transitions for hover/active */
+
+    /* Animation */
+    animation: fadeInRight 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.2s; /* Slight delay after audio player appears */
+}
+
+#toggle-music-button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+#toggle-music-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* If you combine the audio player with the button, you might need to adjust positions */
+/* For example, if you hide the audio controls and only use the button: */
+/*
+#background-audio[controls] {
+    display: none; // Hides the default controls if you are using your own JS button
+}
+*/

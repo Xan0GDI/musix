@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xan0 | Musix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo/logo.png" alt="Artist Logo" class="logo">
+            <h1 class="artist-name"></h1>
+        </header>
+
+        <section id="artist-profiles" class="profile-links"></section>
+
+        <main id="music-container"></main>
+    </div>
+        <audio id="background-audio" loop autoplay muted>
+        <source src="audio/bg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="toggle-music-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; padding: 10px; cursor: pointer;">
+        Music: On
+    </button>
+
+    <script src="js/main.js"></script>
+    <script>
+        // JavaScript to toggle mute/unmute
+        const audio = document.getElementById('background-audio');
+        const toggleButton = document.getElementById('toggle-music-button');
+
+        // Check if autoplay started successfully (some browsers might still block muted autoplay on first load)
+        audio.play().catch(error => {
+            console.log("Autoplay was prevented, usually due to browser policy. User interaction needed to play.");
+            toggleButton.textContent = 'Music: Off (Click to Play)';
+            audio.muted = true; // Ensure it's muted if autoplay failed
+        });
+
+        toggleButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                audio.muted = false; // Unmute when playing
+                toggleButton.textContent = 'Music: On';
+            } else {
+                audio.pause();
+                audio.muted = true; // Mute when pausing
+                toggleButton.textContent = 'Music: Off';
+            }
+        });
+
+        // Update button text based on initial muted state
+        if (audio.muted) {
+            toggleButton.textContent = 'Music: Off';
+        } else {
+            toggleButton.textContent = 'Music: On';
+        }
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>
